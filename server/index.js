@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3001;
+const PORT = 6969;
 const userData = require('./MOCK_DATA.json');
 const graphql = require('graphql');
 const {
@@ -10,7 +10,7 @@ const {
 	GraphQLString,
 	GraphQLList,
 } = graphql;
-const graphqlHTTP = require('express-graphql');
+const { graphqlHTTP } = require('express-graphql');
 
 const userType = new GraphQLObjectType({
 	name: 'User',
@@ -37,7 +37,7 @@ const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
 	fields: {
 		getAllUsers: {
-			type: new GraphQLList(UserType),
+			type: new GraphQLList(userType),
 		},
 	},
 });
@@ -76,13 +76,13 @@ const Mutation = new GraphQLObjectType({
 
 const schema = new GraphQLSchema({
 	query: RootQuery,
-	mutation: mutation,
+	Mutation: Mutation,
 });
 app.use(
-	'/grapql',
+	'/graphql',
 	graphqlHTTP({
 		schema,
-		graphql: true,
+		graphiql: true,
 	})
 );
 app.listen(PORT, () => console.log('server is running'));
