@@ -33,6 +33,7 @@ const userType = new GraphQLObjectType({
 	}),
 });
 
+// creating the query
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
 	fields: {
@@ -45,6 +46,8 @@ const RootQuery = new GraphQLObjectType({
 		},
 	},
 });
+
+//update and delete data
 const Mutation = new GraphQLObjectType({
 	name: 'Mutation',
 	filds: {
@@ -63,16 +66,17 @@ const Mutation = new GraphQLObjectType({
 				password: {
 					type: GraphQLString,
 				},
-				resolve(parent, args) {
-					userData.push({
-						id: userData.length + 1,
-						firstName: args.firstName,
-						lastName: args.lastName,
-						email: args.email,
-						password: args.password,
-					});
-					return args;
-				},
+			},
+			resolve(parent, args) {
+				//userData.push since the data is an array
+				userData.push({
+					id: userData.length + 1,
+					firstName: args.firstName,
+					lastName: args.lastName,
+					email: args.email,
+					password: args.password,
+				});
+				return args;
 			},
 		},
 	},
@@ -80,7 +84,7 @@ const Mutation = new GraphQLObjectType({
 
 const schema = new GraphQLSchema({
 	query: RootQuery,
-	Mutation: Mutation,
+	mutation: Mutation,
 });
 app.use(
 	'/graphql',
