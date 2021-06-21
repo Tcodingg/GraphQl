@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CREATE_USER_MUTATION } from '../graphql/Mutations';
 
 export default function From() {
 	const [firstName, setFirstName] = useState('');
@@ -16,17 +17,17 @@ export default function From() {
 			/>
 			<input
 				type='text'
-				placeholder='first name'
+				placeholder='last name'
 				onChange={(e) => setLastName(e.target.value)}
 			/>
 			<input
 				type='text'
-				placeholder='first name'
+				placeholder='email'
 				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<input
-				type='text'
-				placeholder='first name'
+				type='password'
+				placeholder='password'
 				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<button onClick={addUser}> Create User</button>
